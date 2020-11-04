@@ -8,3 +8,8 @@
  */
 
 rootProject.name = 'poc-api-gateway'
+include 'srv:gateway'
+include 'srv:profile'
+include 'srv:service1'
+include 'srv:service2'
+include 'srv:service3'
