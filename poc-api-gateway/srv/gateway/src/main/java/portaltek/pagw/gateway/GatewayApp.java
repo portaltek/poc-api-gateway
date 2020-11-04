@@ -9,7 +9,7 @@ import static org.springframework.boot.SpringApplication.run;
 @SpringBootApplication
 @RestController
 class GatewayApp {
-  @GetMapping("/rest/open/hi")
+  @GetMapping("/api/open/hi")
   public String hi() {
     return "hi!";
   }

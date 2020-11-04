@@ -1,40 +1,41 @@
 ext {
-    springBootVersion = "2.3.4.RELEASE"
-    archunitVersion = "1.1.0"
+   springBootVersion = "2.3.4.RELEASE"
+   archunitVersion = "1.1.0"
 }
 subprojects {
-    apply plugin: 'java-library'
-    apply plugin: 'java'
-    apply plugin: 'groovy'
+   apply plugin: 'java-library'
+   apply plugin: 'java'
+   apply plugin: 'groovy'
 
-    group = 'portaltek.pagw'
-    version = '0.0.1-SNAPSHOT'
-    sourceCompatibility = 15
-    targetCompatibility = 15
+   group = 'portaltek.pagw'
+   version = '0.0.1-SNAPSHOT'
+   sourceCompatibility = 15
+   targetCompatibility = 15
 
-    dependencies {
-        implementation(
-                'org.apache.commons:commons-collections4:4.4',
-                'org.apache.commons:commons-lang3:3.9',
-                'org.slf4j:slf4j-api:1.7.25',
-                'ch.qos.logback:logback-classic:1.2.3',
-                'org.projectlombok:lombok:1.18.8',
-                'org.codehaus.groovy:groovy:3.0.5'
-        )
+   dependencies {
+      implementation(
+         'org.apache.commons:commons-collections4:4.4',
+         'org.apache.commons:commons-lang3:3.9',
+         'org.slf4j:slf4j-api:1.7.25',
+         'ch.qos.logback:logback-classic:1.2.3',
+         'org.projectlombok:lombok:1.18.8',
+         'org.codehaus.groovy:groovy:3.0.5',
+         "org.springframework.boot:spring-boot-starter-test:$springBootVersion",
+      )
 
-        annotationProcessor 'org.projectlombok:lombok:1.18.8'
-        testAnnotationProcessor 'org.projectlombok:lombok:1.18.8'
-        testImplementation 'org.spockframework:spock-core:2.0-M3-groovy-3.0'
+      annotationProcessor 'org.projectlombok:lombok:1.18.8'
+      testAnnotationProcessor 'org.projectlombok:lombok:1.18.8'
+      testImplementation 'org.spockframework:spock-core:2.0-M3-groovy-3.0'
 
-    }
+   }
 
-    repositories {
-        mavenCentral()
-    }
-    test {
-        useJUnitPlatform()
-    }
-    java {
-        modularity.inferModulePath = true
-    }
+   repositories {
+      mavenCentral()
+   }
+   test {
+      useJUnitPlatform()
+   }
+   java {
+      modularity.inferModulePath = true
+   }
 }
