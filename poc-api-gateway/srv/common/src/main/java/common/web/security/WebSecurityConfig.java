@@ -18,7 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-//
+
 //@Configuration
 //@EnableWebSecurity
 //@EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -26,69 +26,69 @@ public abstract class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
    private final Log log = LogFactory.getLog(this.getClass());
    public static String[] ANONYMOUS_RESOURCES = {"/", "/*.html",
-           "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js", "/**/*.jsp"};
+      "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js", "/**/*.jsp"};
 
 
-//   @Autowired
-//   private WebSecurityEntryPoint unauthorizedHandler;
-//
-//   @Autowired
-//   private UserDetailsService userDetailsService;
-//
-//   @Autowired
-//   public void configureAuthentication(AuthenticationManagerBuilder builder) throws Exception {
-//      builder
-//              .userDetailsService(userDetailsService)
-//              .passwordEncoder(passwordEncoder());
-//   }
-//
-//   @Bean
-//   public PasswordEncoder passwordEncoder() {
-//      return new BCryptPasswordEncoder();
-//   }
-//
-//   @Bean
-//   @Override
-//   public AuthenticationManager authenticationManagerBean() throws Exception {
-//      return super.authenticationManagerBean();
-//   }
-//
-//   @Bean
-//   public WebSecurityFilter webSecurityFilter() {
-//      return new WebSecurityFilter();
-//   }
-//
-//   @Override
-//   protected void configure(HttpSecurity httpSecurity) throws Exception {
-//
-//      httpSecurity.authorizeRequests()
-//              .antMatchers(HttpMethod.GET, ANONYMOUS_RESOURCES).permitAll()
-//              .antMatchers(HttpMethod.OPTIONS).permitAll()
-//              .antMatchers("/api/open/**").permitAll()
-//              .antMatchers("/console/**").permitAll()
-//              .antMatchers("/actuator/health").permitAll()
-//              .anyRequest().authenticated()
-//
-//              .and()
-//              .exceptionHandling()
-//              .authenticationEntryPoint(unauthorizedHandler)
-//
-//              .and()
-//              .sessionManagement()
-//              .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//
-//              .and();
-//
-//      httpSecurity.addFilterBefore(
-//              webSecurityFilter(),
-//              UsernamePasswordAuthenticationFilter.class
-//      );
-//
-//      httpSecurity.csrf().disable();
-//      httpSecurity.headers().cacheControl().disable();
-//      httpSecurity.headers().frameOptions().disable();
-//
-//   }
+   @Autowired
+   private WebSecurityEntryPoint unauthorizedHandler;
+
+   @Autowired
+   private UserDetailsService userDetailsService;
+
+   @Autowired
+   public void configureAuthentication(AuthenticationManagerBuilder builder) throws Exception {
+      builder
+         .userDetailsService(userDetailsService)
+         .passwordEncoder(passwordEncoder());
+   }
+
+   @Bean
+   public PasswordEncoder passwordEncoder() {
+      return new BCryptPasswordEncoder();
+   }
+
+   @Bean
+   @Override
+   public AuthenticationManager authenticationManagerBean() throws Exception {
+      return super.authenticationManagerBean();
+   }
+
+   @Bean
+   public TokenFilter tokenFilter() {
+      return new TokenFilter();
+   }
+
+   @Override
+   protected void configure(HttpSecurity httpSecurity) throws Exception {
+
+      httpSecurity.authorizeRequests()
+         .antMatchers(HttpMethod.GET, ANONYMOUS_RESOURCES).permitAll()
+         .antMatchers(HttpMethod.OPTIONS).permitAll()
+         .antMatchers("/api/open/**").permitAll()
+         .antMatchers("/console/**").permitAll()
+         .antMatchers("/actuator/health").permitAll()
+         .anyRequest().authenticated()
+
+         .and()
+         .exceptionHandling()
+         .authenticationEntryPoint(unauthorizedHandler)
+
+         .and()
+         .sessionManagement()
+         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
+         .and();
+
+      httpSecurity.addFilterBefore(
+         tokenFilter(),
+         UsernamePasswordAuthenticationFilter.class
+      );
+
+      httpSecurity.csrf().disable();
+      httpSecurity.headers().cacheControl().disable();
+      httpSecurity.headers().frameOptions().disable();
+
+   }
 
 
 }
