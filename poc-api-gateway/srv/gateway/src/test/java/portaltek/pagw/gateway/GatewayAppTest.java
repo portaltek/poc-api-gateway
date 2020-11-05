@@ -4,11 +4,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
+import portaltek.pagw.common.web.test.Api;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -22,9 +21,7 @@ class GatewayAppTest {
    @Autowired
    ApplicationContext ctx;
    @Autowired
-   TestRestTemplate rest;
-   @LocalServerPort
-   Integer port;
+   Api api;
    String EXPECTED = "hi!";
 
    @Test
@@ -34,8 +31,8 @@ class GatewayAppTest {
 
    @Test
    public void testHi() {
-      var url = "http://localhost:" + port + "/api/open/hi";
-      var response = rest.getForEntity(url, String.class).getBody();
+      var url = api.url("/api/open/hi");
+      var response = api.get(url, String.class).getBody();
       assertNotNull(response);
       assertEquals(EXPECTED, response);
    }

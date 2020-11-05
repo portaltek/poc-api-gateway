@@ -5,6 +5,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import portaltek.pagw.common.web.security.jwt.JwtRequest;
 import portaltek.pagw.common.web.security.jwt.JwtResponse;
 
@@ -25,9 +26,10 @@ public class Api {
    }
 
    public String createToken(String username, String password) {
-      var url = rest.urlBase() + tokenEndpoint;
+
       HttpEntity<JwtRequest> req = getEntity(username, password);
-      return ofNullable(rest.template().postForEntity(url, req, JwtResponse.class))
+      var url = url(tokenEndpoint);
+      return ofNullable(post(url, req, JwtResponse.class))
          .map(HttpEntity::getBody)
          .map(JwtResponse::getToken)
          .orElse("");
@@ -40,8 +42,16 @@ public class Api {
       return headers;
    }
 
-   public TestRestTemplate rest() {
+   public TestRestTemplate template() {
       return rest.template();
+   }
+
+   public <T> ResponseEntity<T> get(String url, Class<T> reqType) {
+      return template().getForEntity(url, reqType);
+   }
+
+   public <T> ResponseEntity<T> post(String url, Object req, Class<T> reqType) {
+      return template().postForEntity(url, req, reqType);
    }
 
    public String url(String endpoint) {

@@ -13,12 +13,10 @@ import portaltek.pagw.common.web.test.Rest;
 @Lazy
 @TestConfiguration
 class GatewayAppTestConfig {
-   String host = "http://localhost:";
-   String createTokenEndpoint = "/api/open/token/create";
+   private final String host = "http://localhost:";
+   private final String createTokenEndpoint = "/api/open/token/create";
    @LocalServerPort
-   int port;
-   @Autowired
-   TestRestTemplate template;
+   private int port;
 
    @Bean
    public Rest rest(TestRestTemplate template) {

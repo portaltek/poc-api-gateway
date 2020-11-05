@@ -2,7 +2,7 @@ package portaltek.pagw.common.web.security.jwt;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 import java.util.Set;
@@ -10,19 +10,20 @@ import java.util.stream.Collectors;
 
 public class JwtUserFactory {
 
-   private static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+   private PasswordEncoder encoder;
 
-   private JwtUserFactory() {
+   public JwtUserFactory(PasswordEncoder encoder) {
+      this.encoder = encoder;
    }
 
-   public static JwtUser create(String username, Set<String> authList) {
+   public JwtUser create(Long id, String username, Set<String> authList) {
       return new JwtUser(
-         1L, username, hashPassword(username), map(authList), true
+         id, username, hash(username), map(authList), true
       );
    }
 
-   public static String hashPassword(String password) {
-      return encoder.encode(password);
+   public String hash(String string) {
+      return encoder.encode(string);
    }
 
    public static List<GrantedAuthority> map(Set<String> authorities) {

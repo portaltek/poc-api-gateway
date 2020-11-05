@@ -29,8 +29,13 @@ class JwtWebSecurityConfig {
    }
 
    @Bean
-   public ProfileServiceAdapter profileServiceAdapter() {
-      return new ProfileServiceAdapter();
+   public JwtUserFactory jwtUserFactory(PasswordEncoder encoder) {
+      return new JwtUserFactory(encoder);
+   }
+
+   @Bean
+   public ProfileServiceAdapter profileServiceAdapter(JwtUserFactory jwtUserFactory) {
+      return new ProfileServiceAdapter(jwtUserFactory);
    }
 
    @Bean
@@ -52,6 +57,7 @@ class JwtWebSecurityConfig {
    public JwtFilter tokenFilter(JwtValidator jwtValidator) {
       return new JwtFilter(jwtValidator);
    }
+
 
    @Bean
    public JwtGenerator jwtGenerator(ProfileServiceAdapter profileServiceAdapter) {

@@ -48,15 +48,13 @@ class JwtControllerITest {
    @Test
    public void postInvalidLogin_shouldReturnNull() {
       String token = api.createToken("admin", "admin2");
-      then(token).isNull();
+      then(token).isEmpty();
    }
 
    @Test
    public void getPing_shouldReturnPong() {
 
-      var response = api.rest()
-         .getForEntity(pingUrl, String.class);
-
+      var response = api.get(pingUrl, String.class);
       then(response.getStatusCode()).isEqualTo(OK);
       then(response.getBody()).isEqualTo(EXPECTED_MSG);
    }
