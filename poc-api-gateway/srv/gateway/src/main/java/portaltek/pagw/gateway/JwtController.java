@@ -47,7 +47,8 @@ class JwtController {
          getContext().setAuthentication(auth);
 
       } catch (AuthenticationException e) {
-         return JwtResponse.of(e);
+//         return JwtResponse.of(e);
+         return ServerResponse.of(e);
       }
 
       var response = jwtGenerator.create(req.getUsername());

@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import portaltek.pagw.common.web.security.jwt.JwtFilter;
@@ -37,17 +38,17 @@ class GatewayWebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
    private WebSecurityEntryPoint unauthorizedHandler;
    private ProfileServiceAdapter profileServiceAdapter;
    private PasswordEncoder passwordEncoder;
-   private JwtValidator jwtValidator;
+   private JwtFilter jwtFilter;
 
    @Autowired
    public GatewayWebSecurityConfigAdapter(WebSecurityEntryPoint unauthorizedHandler,
                                           ProfileServiceAdapter profileServiceAdapter,
                                           PasswordEncoder passwordEncoder,
-                                          JwtValidator jwtValidator) {
+                                          JwtFilter jwtFilter) {
       this.unauthorizedHandler = unauthorizedHandler;
       this.profileServiceAdapter = profileServiceAdapter;
       this.passwordEncoder = passwordEncoder;
-      this.jwtValidator = jwtValidator;
+      this.jwtFilter = jwtFilter;
    }
 
    @Autowired
@@ -64,24 +65,10 @@ class GatewayWebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
       return super.authenticationManagerBean();
    }
 
-   @Bean
-   public JwtFilter authenticationTokenFilterBean() {
-      return new JwtFilter(jwtValidator);
-   }
-
-
    @Override
    protected void configure(HttpSecurity httpSecurity) throws Exception {
 
-      httpSecurity.authorizeRequests()
-         .antMatchers(GET, ANONYMOUS_RESOURCES).permitAll()
-         .antMatchers(OPTIONS).permitAll()
-         .antMatchers("/api/open/**").permitAll()
-         .antMatchers("/console/**").permitAll()
-         .antMatchers("/actuator/health").permitAll()
-         .anyRequest().authenticated()
-
-         .and()
+      configureAuthorizeRequests(httpSecurity)
          .exceptionHandling()
          .authenticationEntryPoint(unauthorizedHandler)
 
@@ -89,15 +76,21 @@ class GatewayWebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
          .sessionManagement()
          .sessionCreationPolicy(STATELESS);
 
-      httpSecurity.addFilterBefore(
-         authenticationTokenFilterBean(),
-         UsernamePasswordAuthenticationFilter.class
-      );
-
+      httpSecurity.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
       httpSecurity.csrf().disable();
       httpSecurity.headers().cacheControl().disable();
       httpSecurity.headers().frameOptions().disable();
 
+   }
+
+   protected HttpSecurity configureAuthorizeRequests(HttpSecurity httpSecurity) throws Exception {
+      return httpSecurity.authorizeRequests()
+         .antMatchers(GET, ANONYMOUS_RESOURCES).permitAll()
+         .antMatchers(OPTIONS).permitAll()
+         .antMatchers("/api/open/**").permitAll()
+         .antMatchers("/console/**").permitAll()
+         .antMatchers("/actuator/health").permitAll()
+         .anyRequest().authenticated().and();
    }
 
 
