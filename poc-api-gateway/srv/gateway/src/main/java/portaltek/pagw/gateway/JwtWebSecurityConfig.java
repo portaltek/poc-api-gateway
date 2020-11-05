@@ -12,7 +12,7 @@ import portaltek.pagw.common.web.security.WebSecurityEntryPoint;
 
 
 @Configuration
-class GatewayWebSecurityConfig {
+class JwtWebSecurityConfig {
 
    @Value("${jwt.header}")
    private String tokenHeader;
@@ -21,7 +21,7 @@ class GatewayWebSecurityConfig {
    @Value("${jwt.secret}")
    private String secret;
    @Value("${jwt.expiration}")
-   Long expiration;
+   private Long expiration;
 
    @Bean
    public PasswordEncoder passwordEncoder() {

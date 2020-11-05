@@ -27,7 +27,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@Import({GatewayWebSecurityConfig.class})
+@Import({JwtWebSecurityConfig.class})
 class GatewayWebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
 
    private final Log log = LogFactory.getLog(this.getClass());
