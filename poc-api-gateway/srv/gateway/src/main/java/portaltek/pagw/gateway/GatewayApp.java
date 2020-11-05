@@ -14,6 +14,13 @@ class GatewayApp {
     return "hi!";
   }
 
+  @GetMapping("/api/auth/hi")
+  public String auth() {
+    return "auth!";
+  }
+
+
+
   public static void main(String[] args) {
     run(GatewayApp.class, args);
   }

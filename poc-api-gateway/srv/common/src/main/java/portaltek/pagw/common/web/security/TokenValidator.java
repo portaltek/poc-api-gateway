@@ -21,12 +21,8 @@ public class TokenValidator {
 
    private final Log logger = LogFactory.getLog(this.getClass());
 
-   @Autowired
    private JwtUtil jwtUtil;
-
-   @Value("${jwt.header}")
    private String tokenHeader;
-   @Value("${jwt.refresh.header}")
    private String refreshTokenHeader;
 
    public TokenValidator(JwtUtil jwtUtil, String tokenHeader, String refreshTokenHeader) {

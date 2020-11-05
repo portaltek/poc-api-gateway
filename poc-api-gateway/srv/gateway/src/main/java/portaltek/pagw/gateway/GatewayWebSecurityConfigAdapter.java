@@ -4,11 +4,9 @@ package portaltek.pagw.gateway;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -16,15 +14,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import portaltek.pagw.common.web.security.JwtUtil;
 import portaltek.pagw.common.web.security.TokenFilter;
 import portaltek.pagw.common.web.security.TokenValidator;
 import portaltek.pagw.common.web.security.WebSecurityEntryPoint;
-import portaltek.pagw.common.web.user.GenericUserService;
 
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.OPTIONS;
@@ -34,7 +28,7 @@ import static org.springframework.http.HttpMethod.OPTIONS;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Import({GatewayWebSecurityConfig.class})
-class GatewayWebSecurityConfig2 extends WebSecurityConfigurerAdapter {
+class GatewayWebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
 
    private final Log log = LogFactory.getLog(this.getClass());
    public static String[] ANONYMOUS_RESOURCES = {"/", "/*.html",
@@ -46,10 +40,10 @@ class GatewayWebSecurityConfig2 extends WebSecurityConfigurerAdapter {
    private TokenValidator tokenValidator;
 
    @Autowired
-   public GatewayWebSecurityConfig2(WebSecurityEntryPoint unauthorizedHandler,
-                                    ProfileServiceAdapter profileServiceAdapter,
-                                    PasswordEncoder passwordEncoder,
-                                    TokenValidator tokenValidator) {
+   public GatewayWebSecurityConfigAdapter(WebSecurityEntryPoint unauthorizedHandler,
+                                          ProfileServiceAdapter profileServiceAdapter,
+                                          PasswordEncoder passwordEncoder,
+                                          TokenValidator tokenValidator) {
       this.unauthorizedHandler = unauthorizedHandler;
       this.profileServiceAdapter = profileServiceAdapter;
       this.passwordEncoder = passwordEncoder;
