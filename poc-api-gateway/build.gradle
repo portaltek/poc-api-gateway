@@ -18,15 +18,25 @@ subprojects {
          'org.apache.commons:commons-lang3:3.9',
          'org.slf4j:slf4j-api:1.7.25',
          'ch.qos.logback:logback-classic:1.2.3',
-         'org.projectlombok:lombok:1.18.8',
+         "org.projectlombok:lombok:1.18.8",
          'org.codehaus.groovy:groovy:3.0.5',
          "org.springframework.boot:spring-boot-starter-test:$springBootVersion",
       )
 
       annotationProcessor 'org.projectlombok:lombok:1.18.8'
       testAnnotationProcessor 'org.projectlombok:lombok:1.18.8'
-      testImplementation 'org.spockframework:spock-core:2.0-M3-groovy-3.0'
 
+      testImplementation(
+         'org.projectlombok:lombok:1.18.8',
+         'org.junit.jupiter:junit-jupiter:5.6.2',
+         "org.springframework.boot:spring-boot-starter-test:$springBootVersion",
+         'org.mockito:mockito-junit-jupiter:2.23.0',
+         'org.codehaus.groovy:groovy:3.0.5',
+         'org.spockframework:spock-core:2.0-M3-groovy-3.0',
+         "io.rest-assured:rest-assured:4.1.1",
+         "io.rest-assured:json-path:4.1.1",
+         "io.rest-assured:xml-path:4.1.1",
+      )
    }
 
    repositories {
