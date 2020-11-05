@@ -19,7 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 //@Configuration
 //@EnableWebSecurity
 //@EnableGlobalMethodSecurity(prePostEnabled = true)
-public abstract class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public abstract class AbstractWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
    private final Log log = LogFactory.getLog(this.getClass());
    public static String[] ANONYMOUS_RESOURCES = {"/", "/*.html",
@@ -27,8 +27,8 @@ public abstract class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
    protected abstract WebSecurityEntryPoint unauthorizedHandler();
-   protected abstract UserDetailsService userDetailsService();
 
+   protected abstract UserDetailsService userDetailsService();
 
 
    @Autowired
