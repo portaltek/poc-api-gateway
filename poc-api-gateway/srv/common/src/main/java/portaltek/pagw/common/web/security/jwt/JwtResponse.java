@@ -1,7 +1,6 @@
 package portaltek.pagw.common.web.security.jwt;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.AuthenticationException;
 
 import java.io.Serializable;
 
