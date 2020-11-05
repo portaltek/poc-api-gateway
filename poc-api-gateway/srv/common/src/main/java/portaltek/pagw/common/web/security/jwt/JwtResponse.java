@@ -10,9 +10,12 @@ public class JwtResponse implements Serializable {
 
    private static final long serialVersionUID = 1250166508152483573L;
 
-   private final String token;
-   private final String refreshToken;
-   private final String message;
+   private String token;
+   private String refreshToken;
+   private String message;
+
+   public JwtResponse() {
+   }
 
    public JwtResponse(String token, String refreshToken, String message) {
       this.token = token;

@@ -16,6 +16,7 @@ import portaltek.pagw.common.web.security.jwt.JwtResponse;
 
 import static org.springframework.http.ResponseEntity.ok;
 import static org.springframework.security.core.context.SecurityContextHolder.getContext;
+import static portaltek.pagw.common.web.security.ServerResponse.of;
 
 @RestController
 class JwtController {
@@ -30,9 +31,9 @@ class JwtController {
       this.jwtGenerator = jwtGenerator;
    }
 
-   @PostMapping(value = "/api/open/token/hi")
+   @GetMapping(value = "/api/open/token/hi")
    public ResponseEntity<ServerResponse> ping() {
-      return ok(ServerResponse.of("hi!"));
+      return ok(of("hi!"));
    }
 
    @PostMapping(value = "/api/open/token/create")
