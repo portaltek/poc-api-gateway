@@ -4,21 +4,20 @@ package portaltek.pagw.gateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import portaltek.pagw.common.web.security.*;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.context.annotation.Profile;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import portaltek.pagw.common.web.security.JwtUtil;
+import portaltek.pagw.common.web.security.TokenFilter;
+import portaltek.pagw.common.web.security.TokenValidator;
+import portaltek.pagw.common.web.security.WebSecurityEntryPoint;
 
 
-//@Configuration
-//@EnableWebSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
-class GatewayWebSecurityConfig extends AbstractWebSecurityConfig {
+@Configuration
+class GatewayWebSecurityConfig {
 
-
-   @Autowired
-   protected UserDetailsService userDetailsService;
    @Value("${jwt.header}")
    private String tokenHeader;
    @Value("${jwt.refresh.header}")
@@ -27,15 +26,19 @@ class GatewayWebSecurityConfig extends AbstractWebSecurityConfig {
    private String secret;
 
    @Bean
-   protected WebSecurityEntryPoint unauthorizedHandler() {
-      return new WebSecurityEntryPoint();
+   public PasswordEncoder passwordEncoder() {
+      return new BCryptPasswordEncoder();
    }
 
    @Bean
-   protected UserDetailsService userDetailsService() {
-      return userDetailsService;
+   protected ProfileServiceAdapter profileServiceAdapter() {
+      return new ProfileServiceAdapter();
    }
 
+   @Bean
+   protected WebSecurityEntryPoint unauthorizedHandler() {
+      return new WebSecurityEntryPoint();
+   }
 
    @Bean
    protected JwtUtil jwtUtil() {
@@ -51,8 +54,6 @@ class GatewayWebSecurityConfig extends AbstractWebSecurityConfig {
    protected TokenFilter tokenFilter(TokenValidator tokenValidator) {
       return new TokenFilter(tokenValidator);
    }
-
-
 
 
 }

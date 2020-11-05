@@ -1,4 +1,4 @@
-package portaltek.pagw.gateway.spi.profile;
+package portaltek.pagw.gateway;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import portaltek.pagw.common.web.user.GenericUserService;
 
-@Service
+
 class ProfileServiceAdapter implements UserDetailsService {
 
    static final String NOT_FOUND = "No user found with username '%s'.";
