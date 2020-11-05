@@ -1,14 +1,11 @@
-package portaltek.pagw.common.web.security;
+package portaltek.pagw.common.web.security.jwt;
 
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -17,7 +14,7 @@ import static java.util.Optional.ofNullable;
 import static org.springframework.security.core.context.SecurityContextHolder.getContext;
 
 
-public class TokenValidator {
+public class JwtValidator {
 
    private final Log logger = LogFactory.getLog(this.getClass());
 
@@ -25,7 +22,7 @@ public class TokenValidator {
    private String tokenHeader;
    private String refreshTokenHeader;
 
-   public TokenValidator(JwtUtil jwtUtil, String tokenHeader, String refreshTokenHeader) {
+   public JwtValidator(JwtUtil jwtUtil, String tokenHeader, String refreshTokenHeader) {
       this.jwtUtil = jwtUtil;
       this.tokenHeader = tokenHeader;
       this.refreshTokenHeader = refreshTokenHeader;

@@ -1,4 +1,4 @@
-package portaltek.pagw.common.web.user;
+package portaltek.pagw.common.web.security.jwt;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -8,10 +8,10 @@ import java.util.Set;
 
 import static java.lang.String.format;
 import static java.util.Optional.ofNullable;
-import static portaltek.pagw.common.web.user.GenericUserFactory.create;
+import static portaltek.pagw.common.web.security.jwt.JwtUserFactory.create;
 
 
-public class GenericUserService implements UserDetailsService {
+public class JwtUserService implements UserDetailsService {
 
    static final String NOT_FOUND = "No user found with username '%s'.";
 

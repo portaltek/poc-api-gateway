@@ -1,17 +1,13 @@
 package portaltek.pagw.gateway;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import portaltek.pagw.common.web.security.JwtUtil;
-import portaltek.pagw.common.web.security.TokenFilter;
-import portaltek.pagw.common.web.security.TokenValidator;
+import portaltek.pagw.common.web.security.jwt.*;
 import portaltek.pagw.common.web.security.WebSecurityEntryPoint;
 
 
@@ -24,6 +20,8 @@ class GatewayWebSecurityConfig {
    private String refreshTokenHeader;
    @Value("${jwt.secret}")
    private String secret;
+   @Value("${jwt.expiration}")
+   Long expiration;
 
    @Bean
    public PasswordEncoder passwordEncoder() {
@@ -31,28 +29,33 @@ class GatewayWebSecurityConfig {
    }
 
    @Bean
-   protected ProfileServiceAdapter profileServiceAdapter() {
+   public ProfileServiceAdapter profileServiceAdapter() {
       return new ProfileServiceAdapter();
    }
 
    @Bean
-   protected WebSecurityEntryPoint unauthorizedHandler() {
+   public WebSecurityEntryPoint unauthorizedHandler() {
       return new WebSecurityEntryPoint();
    }
 
    @Bean
-   protected JwtUtil jwtUtil() {
+   public JwtUtil jwtUtil() {
       return new JwtUtil(secret);
    }
 
    @Bean
-   protected TokenValidator tokenValidator(JwtUtil jwtUtil) {
-      return new TokenValidator(jwtUtil, tokenHeader, refreshTokenHeader);
+   public JwtValidator tokenValidator(JwtUtil jwtUtil) {
+      return new JwtValidator(jwtUtil, tokenHeader, refreshTokenHeader);
    }
 
    @Bean
-   protected TokenFilter tokenFilter(TokenValidator tokenValidator) {
-      return new TokenFilter(tokenValidator);
+   public JwtFilter tokenFilter(JwtValidator jwtValidator) {
+      return new JwtFilter(jwtValidator);
+   }
+
+   @Bean
+   public JwtGenerator jwtGenerator(ProfileServiceAdapter profileServiceAdapter) {
+      return new JwtGeneratorImpl(secret, expiration, profileServiceAdapter);
    }
 
 

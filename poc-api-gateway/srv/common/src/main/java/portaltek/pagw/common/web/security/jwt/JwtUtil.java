@@ -1,4 +1,4 @@
-package portaltek.pagw.common.web.security;
+package portaltek.pagw.common.web.security.jwt;
 
 
 import io.jsonwebtoken.*;
@@ -13,7 +13,9 @@ import java.util.stream.Collectors;
 public class JwtUtil implements Serializable {
 
   private static final long serialVersionUID = -3301605591108950417L;
+  public static final String CLAIM_KEY_ID = "jti";
   public static final String CLAIM_KEY_USERID = "userId";
+  public static final String CLAIM_KEY_USERNAME = "sub";
   public static final String CLAIM_KEY_CREATED = "created";
   public static final String CLAIM_KEY_ROLES = "roles";
   public static final String BEARER = "Bearer ";

@@ -12,6 +12,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import portaltek.pagw.common.web.security.jwt.JwtFilter;
+import portaltek.pagw.common.web.security.jwt.JwtUtil;
+import portaltek.pagw.common.web.security.jwt.JwtValidator;
 
 
 public abstract class AbstractWebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -26,9 +29,9 @@ public abstract class AbstractWebSecurityConfig extends WebSecurityConfigurerAda
 
    protected abstract JwtUtil jwtUtil();
 
-   protected abstract TokenValidator tokenValidator(JwtUtil jwtUtil);
+   protected abstract JwtValidator tokenValidator(JwtUtil jwtUtil);
 
-   protected abstract TokenFilter tokenFilter(TokenValidator tokenValidator);
+   protected abstract JwtFilter tokenFilter(JwtValidator jwtValidator);
 
 
 

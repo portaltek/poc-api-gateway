@@ -1,10 +1,8 @@
-package portaltek.pagw.common.web.security;
+package portaltek.pagw.common.web.security.jwt;
 
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -14,13 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-public class TokenFilter extends OncePerRequestFilter {
+public class JwtFilter extends OncePerRequestFilter {
 
    private final Log logger = LogFactory.getLog(this.getClass());
 
-   private TokenValidator validator;
+   private JwtValidator validator;
 
-   public TokenFilter(TokenValidator validator) {
+   public JwtFilter(JwtValidator validator) {
       this.validator = validator;
    }
 

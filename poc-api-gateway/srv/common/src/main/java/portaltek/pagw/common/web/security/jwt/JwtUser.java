@@ -1,4 +1,4 @@
-package portaltek.pagw.common.web.user;
+package portaltek.pagw.common.web.security.jwt;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class GenericUser implements UserDetails {
+public class JwtUser implements UserDetails {
 
    private static final long serialVersionUID = 1L;
    private final Long id;
@@ -15,7 +15,7 @@ public class GenericUser implements UserDetails {
    private final Collection<? extends GrantedAuthority> authorities;
    private final boolean enabled;
 
-   public GenericUser(
+   public JwtUser(
       Long id,
       String username,
       String password, Collection<? extends GrantedAuthority> authorities,

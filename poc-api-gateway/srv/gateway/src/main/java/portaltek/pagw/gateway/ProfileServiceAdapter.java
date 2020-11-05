@@ -3,7 +3,7 @@ package portaltek.pagw.gateway;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import portaltek.pagw.common.web.user.GenericUserService;
+import portaltek.pagw.common.web.security.jwt.JwtUserService;
 
 
 class ProfileServiceAdapter implements UserDetailsService {
@@ -13,7 +13,7 @@ class ProfileServiceAdapter implements UserDetailsService {
    private UserDetailsService userService;
 
    public ProfileServiceAdapter() {
-      this.userService = new GenericUserService();
+      this.userService = new JwtUserService();
    }
 
    @Override

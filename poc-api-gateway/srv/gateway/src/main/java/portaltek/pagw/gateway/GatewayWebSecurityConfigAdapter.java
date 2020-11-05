@@ -13,11 +13,10 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import portaltek.pagw.common.web.security.TokenFilter;
-import portaltek.pagw.common.web.security.TokenValidator;
+import portaltek.pagw.common.web.security.jwt.JwtFilter;
+import portaltek.pagw.common.web.security.jwt.JwtValidator;
 import portaltek.pagw.common.web.security.WebSecurityEntryPoint;
 
 import static org.springframework.http.HttpMethod.GET;
@@ -38,17 +37,17 @@ class GatewayWebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
    private WebSecurityEntryPoint unauthorizedHandler;
    private ProfileServiceAdapter profileServiceAdapter;
    private PasswordEncoder passwordEncoder;
-   private TokenValidator tokenValidator;
+   private JwtValidator jwtValidator;
 
    @Autowired
    public GatewayWebSecurityConfigAdapter(WebSecurityEntryPoint unauthorizedHandler,
                                           ProfileServiceAdapter profileServiceAdapter,
                                           PasswordEncoder passwordEncoder,
-                                          TokenValidator tokenValidator) {
+                                          JwtValidator jwtValidator) {
       this.unauthorizedHandler = unauthorizedHandler;
       this.profileServiceAdapter = profileServiceAdapter;
       this.passwordEncoder = passwordEncoder;
-      this.tokenValidator = tokenValidator;
+      this.jwtValidator = jwtValidator;
    }
 
    @Autowired
@@ -66,8 +65,8 @@ class GatewayWebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
    }
 
    @Bean
-   public TokenFilter authenticationTokenFilterBean() {
-      return new TokenFilter(tokenValidator);
+   public JwtFilter authenticationTokenFilterBean() {
+      return new JwtFilter(jwtValidator);
    }
 
 
