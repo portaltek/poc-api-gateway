@@ -1,4 +1,4 @@
-package common.web.security;
+package portaltek.pagw.common.web.security;
 
 
 import org.apache.commons.logging.Log;
@@ -16,8 +16,8 @@ import java.util.List;
 import static java.util.Optional.ofNullable;
 import static org.springframework.security.core.context.SecurityContextHolder.getContext;
 
-//@Service
-class TokenValidator {
+@Service
+public class TokenValidator {
 
    private final Log logger = LogFactory.getLog(this.getClass());
 

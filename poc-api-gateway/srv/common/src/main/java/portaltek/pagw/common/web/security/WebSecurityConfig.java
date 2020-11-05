@@ -1,16 +1,13 @@
-package common.web.security;
+package portaltek.pagw.common.web.security;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,16 +26,15 @@ public abstract class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js", "/**/*.jsp"};
 
 
-   @Autowired
-   private WebSecurityEntryPoint unauthorizedHandler;
+   protected abstract WebSecurityEntryPoint unauthorizedHandler();
+   protected abstract UserDetailsService userDetailsService();
+
+
 
    @Autowired
-   private UserDetailsService userDetailsService;
-
-   @Autowired
-   public void configureAuthentication(AuthenticationManagerBuilder builder) throws Exception {
+   protected void configureAuthentication(AuthenticationManagerBuilder builder) throws Exception {
       builder
-         .userDetailsService(userDetailsService)
+         .userDetailsService(userDetailsService())
          .passwordEncoder(passwordEncoder());
    }
 
@@ -71,7 +67,7 @@ public abstract class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
          .and()
          .exceptionHandling()
-         .authenticationEntryPoint(unauthorizedHandler)
+         .authenticationEntryPoint(unauthorizedHandler())
 
          .and()
          .sessionManagement()

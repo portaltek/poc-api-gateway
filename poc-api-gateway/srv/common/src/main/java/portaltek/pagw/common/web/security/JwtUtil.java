@@ -1,4 +1,4 @@
-package common.web.security;
+package portaltek.pagw.common.web.security;
 
 
 import io.jsonwebtoken.*;
