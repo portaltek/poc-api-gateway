@@ -9,8 +9,5 @@ dependencies {
 
    )
 
-//   testImplementation('org.apache.httpcomponents:httpclient')
-//   runtime('org.apache.httpcomponents:httpclient')
-//   testRuntime('org.apache.httpcomponents:httpclient')
 
 }
