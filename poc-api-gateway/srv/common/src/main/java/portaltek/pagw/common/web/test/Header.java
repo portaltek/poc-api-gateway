@@ -14,15 +14,15 @@ public class Header {
 
 
     public HttpHeaders admin() {
-        return api.header("admin", "admin");
+        return api.createHeaderWithNewToken("admin", "admin");
     }
 
     public HttpHeaders user() {
-        return api.header("user", "user");
+        return api.createHeaderWithNewToken("user", "user");
     }
 
     public HttpHeaders adminNotValid() {
-        return api.header("admin", "admin2");
+        return api.createHeaderWithNewToken("admin", "admin2");
     }
 
 }

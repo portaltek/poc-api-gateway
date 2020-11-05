@@ -7,9 +7,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import portaltek.pagw.common.web.security.jwt.JwtRequest;
 import portaltek.pagw.common.web.security.jwt.JwtResponse;
-import portaltek.pagw.common.web.security.jwt.JwtUtil;
-
-import java.util.Optional;
 
 import static java.util.Optional.ofNullable;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
@@ -27,7 +24,7 @@ public class Api {
       this.tokenEndpoint = tokenEndpoint;
    }
 
-   public String token(String username, String password) {
+   public String createToken(String username, String password) {
       var url = rest.urlBase() + tokenEndpoint;
       HttpEntity<JwtRequest> req = getEntity(username, password);
       return ofNullable(rest.template().postForEntity(url, req, JwtResponse.class))
@@ -36,10 +33,10 @@ public class Api {
          .orElse("");
    }
 
-   public HttpHeaders header(String username, String password) {
+   public HttpHeaders createHeaderWithNewToken(String username, String password) {
       HttpHeaders headers = new HttpHeaders();
       headers.setContentType(MediaType.APPLICATION_JSON);
-      headers.add(AUTHORIZATION, BEARER + token(username, password));
+      headers.add(AUTHORIZATION, BEARER + createToken(username, password));
       return headers;
    }
 
