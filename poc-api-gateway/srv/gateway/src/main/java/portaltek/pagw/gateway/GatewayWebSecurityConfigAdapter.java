@@ -22,6 +22,7 @@ import portaltek.pagw.common.web.security.WebSecurityEntryPoint;
 
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.OPTIONS;
+import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 
 @Configuration
@@ -87,9 +88,7 @@ class GatewayWebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
 
          .and()
          .sessionManagement()
-         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-
-         .and();
+         .sessionCreationPolicy(STATELESS);
 
       httpSecurity.addFilterBefore(
          authenticationTokenFilterBean(),
