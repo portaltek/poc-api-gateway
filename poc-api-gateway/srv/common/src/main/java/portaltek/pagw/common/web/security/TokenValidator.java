@@ -16,7 +16,7 @@ import java.util.List;
 import static java.util.Optional.ofNullable;
 import static org.springframework.security.core.context.SecurityContextHolder.getContext;
 
-@Service
+
 public class TokenValidator {
 
    private final Log logger = LogFactory.getLog(this.getClass());
@@ -29,6 +29,11 @@ public class TokenValidator {
    @Value("${jwt.refresh.header}")
    private String refreshTokenHeader;
 
+   public TokenValidator(JwtUtil jwtUtil, String tokenHeader, String refreshTokenHeader) {
+      this.jwtUtil = jwtUtil;
+      this.tokenHeader = tokenHeader;
+      this.refreshTokenHeader = refreshTokenHeader;
+   }
 
    public void validate(HttpServletRequest request) {
 
@@ -36,9 +41,9 @@ public class TokenValidator {
          return;
       }
       ofNullable(request.getHeader(tokenHeader))
-              .filter(jwtUtil::hasToken)
-              .map(jwtUtil::removePrefix)
-              .ifPresent(e -> validateToken(request, e));
+         .filter(jwtUtil::hasToken)
+         .map(jwtUtil::removePrefix)
+         .ifPresent(e -> validateToken(request, e));
 
    }
 

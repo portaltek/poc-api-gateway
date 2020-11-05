@@ -15,6 +15,9 @@ public class WebSecurityEntryPoint implements AuthenticationEntryPoint, Serializ
 
    private static final long serialVersionUID = -8970718410437077606L;
 
+   public WebSecurityEntryPoint() {
+   }
+
    @Override
    public void commence(HttpServletRequest request,
                         HttpServletResponse response,

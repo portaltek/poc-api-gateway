@@ -1,7 +1,5 @@
 package portaltek.pagw.common.web.security;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -16,12 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
-//@Configuration
-//@EnableWebSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public abstract class AbstractWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-   private final Log log = LogFactory.getLog(this.getClass());
    public static String[] ANONYMOUS_RESOURCES = {"/", "/*.html",
       "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js", "/**/*.jsp"};
 
@@ -29,6 +23,13 @@ public abstract class AbstractWebSecurityConfig extends WebSecurityConfigurerAda
    protected abstract WebSecurityEntryPoint unauthorizedHandler();
 
    protected abstract UserDetailsService userDetailsService();
+
+   protected abstract JwtUtil jwtUtil();
+
+   protected abstract TokenValidator tokenValidator(JwtUtil jwtUtil);
+
+   protected abstract TokenFilter tokenFilter(TokenValidator tokenValidator);
+
 
 
    @Autowired
@@ -47,11 +48,6 @@ public abstract class AbstractWebSecurityConfig extends WebSecurityConfigurerAda
    @Override
    public AuthenticationManager authenticationManagerBean() throws Exception {
       return super.authenticationManagerBean();
-   }
-
-   @Bean
-   public TokenFilter tokenFilter() {
-      return new TokenFilter();
    }
 
    @Override
@@ -76,7 +72,7 @@ public abstract class AbstractWebSecurityConfig extends WebSecurityConfigurerAda
          .and();
 
       httpSecurity.addFilterBefore(
-         tokenFilter(),
+         tokenFilter(tokenValidator(jwtUtil())),
          UsernamePasswordAuthenticationFilter.class
       );
 
