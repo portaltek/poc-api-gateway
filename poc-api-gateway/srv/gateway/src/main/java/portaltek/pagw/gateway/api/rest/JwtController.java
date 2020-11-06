@@ -1,4 +1,4 @@
-package portaltek.pagw.gateway;
+package portaltek.pagw.gateway.api.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import portaltek.pagw.common.web.security.ServerResponse;
 import portaltek.pagw.common.web.security.jwt.JwtGenerator;
 import portaltek.pagw.common.web.security.jwt.JwtRequest;
-import portaltek.pagw.common.web.security.jwt.JwtResponse;
 
 import static org.springframework.http.ResponseEntity.ok;
 import static org.springframework.security.core.context.SecurityContextHolder.getContext;
@@ -47,7 +46,6 @@ class JwtController {
          getContext().setAuthentication(auth);
 
       } catch (AuthenticationException e) {
-//         return JwtResponse.of(e);
          return ServerResponse.of(e);
       }
 

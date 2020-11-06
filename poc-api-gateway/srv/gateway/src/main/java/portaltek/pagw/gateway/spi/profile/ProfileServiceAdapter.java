@@ -1,4 +1,4 @@
-package portaltek.pagw.gateway;
+package portaltek.pagw.gateway.spi.profile;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import static java.util.Set.of;
 
 
-class ProfileServiceAdapter implements UserDetailsService {
+public class ProfileServiceAdapter implements UserDetailsService {
 
    private static final String NOT_FOUND = "No user found with username '%s'.";
 

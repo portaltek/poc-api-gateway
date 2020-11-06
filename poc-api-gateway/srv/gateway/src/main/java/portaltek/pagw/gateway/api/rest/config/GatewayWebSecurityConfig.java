@@ -1,4 +1,4 @@
-package portaltek.pagw.gateway;
+package portaltek.pagw.gateway.api.rest.config;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
