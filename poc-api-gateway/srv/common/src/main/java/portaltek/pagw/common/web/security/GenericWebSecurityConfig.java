@@ -26,9 +26,9 @@ public abstract class GenericWebSecurityConfig extends WebSecurityConfigurerAdap
 
    @Autowired
    protected void GatewayWebSecurityConfigAdapter(WebSecurityEntryPoint unauthorizedHandler,
-                                               UserDetailsService userDetailService,
-                                               PasswordEncoder passwordEncoder,
-                                               JwtFilter jwtFilter) {
+                                                  UserDetailsService userDetailService,
+                                                  PasswordEncoder passwordEncoder,
+                                                  JwtFilter jwtFilter) {
       this.unauthorizedHandler = unauthorizedHandler;
       this.userDetailService = userDetailService;
       this.passwordEncoder = passwordEncoder;
