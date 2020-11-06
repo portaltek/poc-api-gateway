@@ -17,34 +17,13 @@ import portaltek.pagw.common.web.security.jwt.JwtFilter;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Import(JwtWebSecurityConfig.class)
-class GatewayWebSecurityConfigAdapter extends GenericWebSecurityConfig {
+class GatewayWebSecurityConfig extends GenericWebSecurityConfig {
 
    @Autowired
-   protected JwtFilter jwtFilter;
-   @Autowired
-   protected PasswordEncoder passwordEncoder;
-   @Autowired
-   protected UserDetailsService userDetailsService;
-   @Autowired
-   protected WebSecurityEntryPoint unauthorizedHandler;
-
-   @Override
-   protected WebSecurityEntryPoint unauthorizedHandler() {
-      return unauthorizedHandler;
-   }
-
-   @Override
-   protected UserDetailsService userDetailService() {
-      return userDetailsService;
-   }
-
-   @Override
-   protected PasswordEncoder passwordEncoder() {
-      return passwordEncoder;
-   }
-
-   @Override
-   protected JwtFilter jwtFilter() {
-      return jwtFilter;
+   public GatewayWebSecurityConfig(UserDetailsService userDetailService,
+                                   PasswordEncoder passwordEncoder,
+                                   WebSecurityEntryPoint unauthorizedHandler,
+                                   JwtFilter jwtFilter) {
+      super(userDetailService, passwordEncoder, unauthorizedHandler, jwtFilter);
    }
 }
