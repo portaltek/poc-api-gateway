@@ -2,6 +2,7 @@ package portaltek.pagw.common.web.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,22 +20,25 @@ public abstract class GenericWebSecurityConfig extends WebSecurityConfigurerAdap
    protected static String[] ANONYMOUS_RESOURCES = {"/", "/*.html",
       "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js", "/**/*.jsp"};
 
-   protected WebSecurityEntryPoint unauthorizedHandler;
    protected UserDetailsService userDetailService;
    protected PasswordEncoder passwordEncoder;
-   protected JwtFilter jwtFilter;
 
    @Autowired
-   protected void GatewayWebSecurityConfigAdapter(WebSecurityEntryPoint unauthorizedHandler,
-                                                  UserDetailsService userDetailService,
-                                                  PasswordEncoder passwordEncoder,
-                                                  JwtFilter jwtFilter) {
-      this.unauthorizedHandler = unauthorizedHandler;
+   protected void GatewayWebSecurityConfigAdapter(UserDetailsService userDetailService,
+                                                  PasswordEncoder passwordEncoder) {
       this.userDetailService = userDetailService;
       this.passwordEncoder = passwordEncoder;
-      this.jwtFilter = jwtFilter;
    }
 
+   abstract protected UserDetailsService userDetailService();
+
+   abstract protected PasswordEncoder passwordEncoder();
+
+   abstract protected WebSecurityEntryPoint unauthorizedHandler();
+
+   abstract protected JwtFilter jwtFilter();
+
+   @Lazy
    @Autowired
    protected void configureAuthentication(AuthenticationManagerBuilder builder) throws Exception {
       builder
@@ -53,13 +57,13 @@ public abstract class GenericWebSecurityConfig extends WebSecurityConfigurerAdap
 
       configureAuthorizeRequests(httpSecurity)
          .exceptionHandling()
-         .authenticationEntryPoint(unauthorizedHandler)
+         .authenticationEntryPoint(unauthorizedHandler())
 
          .and()
          .sessionManagement()
          .sessionCreationPolicy(STATELESS);
 
-      httpSecurity.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+      httpSecurity.addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class);
       httpSecurity.csrf().disable();
       httpSecurity.headers().cacheControl().disable();
       httpSecurity.headers().frameOptions().disable();
