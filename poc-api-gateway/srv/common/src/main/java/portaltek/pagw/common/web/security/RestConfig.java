@@ -1,7 +1,5 @@
 package portaltek.pagw.common.web.security;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
@@ -11,7 +9,6 @@ import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 class RestConfig {
-   private final Log log = LogFactory.getLog(this.getClass());
 
    @Bean
    public CorsFilter corsFilter() {
