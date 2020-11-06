@@ -40,13 +40,7 @@ class JwtControllerITest {
    }
 
    @Test
-   public void postValidLogin_shouldReturnToken2() {
-      String token = api.createToken("admin", "admin");
-      then(token).isNotNull();
-   }
-
-   @Test
-   public void postInvalidLogin_shouldReturnNull() {
+   public void postInvalidLogin_shouldReturnEmpty() {
       String token = api.createToken("admin", "admin2");
       then(token).isEmpty();
    }

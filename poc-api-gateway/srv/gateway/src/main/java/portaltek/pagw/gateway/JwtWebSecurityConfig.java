@@ -4,11 +4,10 @@ package portaltek.pagw.gateway;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import portaltek.pagw.common.web.security.jwt.*;
 import portaltek.pagw.common.web.security.WebSecurityEntryPoint;
+import portaltek.pagw.common.web.security.jwt.*;
 
 
 @Configuration
