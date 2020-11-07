@@ -6,9 +6,17 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Profile;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.test.context.ActiveProfiles;
+import portaltek.pagw.common.env.AppProfile;
+import portaltek.pagw.common.web.security.jwt.JwtUserFactory;
 import portaltek.pagw.common.web.test.Api;
 import portaltek.pagw.common.web.test.Header;
 import portaltek.pagw.common.web.test.Rest;
+import portaltek.pagw.gateway.spi.profile.LocalProfileServiceAdapter;
+
+import static portaltek.pagw.common.env.AppProfile.LOCAL;
 
 @Lazy
 @TestConfiguration
@@ -32,6 +40,8 @@ class GatewayAppTestConfig {
    public Header header(Api api) {
       return new Header(api);
    }
+
+
 }
 
 

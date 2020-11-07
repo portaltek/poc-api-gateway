@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+import portaltek.pagw.common.env.AppProfile;
 import portaltek.pagw.common.web.test.Api;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,6 +18,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GatewayApp.class, webEnvironment = RANDOM_PORT)
 @Import(GatewayAppTestConfig.class)
+@ActiveProfiles(AppProfile.LOCAL)
 class GatewayAppTest {
 
    @Autowired

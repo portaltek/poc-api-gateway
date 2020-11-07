@@ -7,7 +7,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+import portaltek.pagw.common.env.AppProfile;
 import portaltek.pagw.common.web.test.Api;
 
 import static org.assertj.core.api.BDDAssertions.then;
@@ -18,6 +20,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GatewayApp.class, webEnvironment = RANDOM_PORT)
 @Import(GatewayAppTestConfig.class)
+@ActiveProfiles(AppProfile.LOCAL)
 class JwtControllerITest {
 
    final static String EXPECTED_MSG = "{\"message\":\"hi!\"}";

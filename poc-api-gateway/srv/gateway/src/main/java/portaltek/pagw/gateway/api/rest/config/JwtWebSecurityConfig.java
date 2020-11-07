@@ -4,12 +4,16 @@ package portaltek.pagw.gateway.api.rest.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import portaltek.pagw.common.web.security.WebSecurityEntryPoint;
 import portaltek.pagw.common.web.security.jwt.*;
+import portaltek.pagw.gateway.spi.profile.LocalProfileServiceAdapter;
 import portaltek.pagw.gateway.spi.profile.ProfileServiceAdapter;
+
+import static portaltek.pagw.common.env.AppProfile.*;
 
 
 @Configuration
@@ -34,11 +38,17 @@ class JwtWebSecurityConfig {
       return new JwtUserFactory(encoder);
    }
 
+   @Profile({DEV, QA, STG, PROD})
    @Bean
    public UserDetailsService userDetailsService(JwtUserFactory jwtUserFactory) {
       return new ProfileServiceAdapter(jwtUserFactory);
    }
 
+   @Profile(LOCAL)
+   @Bean
+   public UserDetailsService localUserDetailsService(JwtUserFactory jwtUserFactory) {
+      return new LocalProfileServiceAdapter(jwtUserFactory);
+   }
    @Bean
    public WebSecurityEntryPoint unauthorizedHandler() {
       return new WebSecurityEntryPoint();
@@ -61,7 +71,7 @@ class JwtWebSecurityConfig {
 
 
    @Bean
-   public JwtGenerator jwtGenerator(ProfileServiceAdapter profileServiceAdapter) {
+   public JwtGenerator jwtGenerator(UserDetailsService profileServiceAdapter) {
       return new JwtGeneratorImpl(secret, expiration, profileServiceAdapter);
    }
 
