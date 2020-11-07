@@ -35,6 +35,8 @@ public class GenericWebSecurityConfig extends WebSecurityConfigurerAdapter {
       this.jwtFilter = jwtFilter;
    }
 
+
+
    @Autowired
    protected void configureAuthentication(AuthenticationManagerBuilder builder) throws Exception {
       builder

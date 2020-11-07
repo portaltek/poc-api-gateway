@@ -12,9 +12,9 @@ import portaltek.pagw.common.web.security.jwt.JwtProps;
 class JwtWebSecurityConfig extends GenericJwtWebSecurityConfig {
 
    @Value("${jwt.header}")
-   private String tokenHeader;
+   private String jwtHeader;
    @Value("${jwt.refresh.header}")
-   private String refreshTokenHeader;
+   private String refreshJwtHeader;
    @Value("${jwt.secret}")
    private String secret;
    @Value("${jwt.expiration}")
@@ -22,10 +22,7 @@ class JwtWebSecurityConfig extends GenericJwtWebSecurityConfig {
 
    @Bean
    public JwtProps jwtProps() {
-      return new JwtProps(tokenHeader,
-         refreshTokenHeader,
-         secret,
-         expiration);
+      return new JwtProps(jwtHeader, refreshJwtHeader, secret, expiration);
    }
 
 
