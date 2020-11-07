@@ -19,13 +19,11 @@ public class JwtValidator {
    private final Log logger = LogFactory.getLog(this.getClass());
 
    private JwtUtil jwtUtil;
-   private String tokenHeader;
-   private String refreshTokenHeader;
+   private final String tokenHeader;
 
-   public JwtValidator(JwtUtil jwtUtil, String tokenHeader, String refreshTokenHeader) {
+   public JwtValidator(JwtUtil jwtUtil) {
       this.jwtUtil = jwtUtil;
-      this.tokenHeader = tokenHeader;
-      this.refreshTokenHeader = refreshTokenHeader;
+      this.tokenHeader = jwtUtil.getProps().getTokenHeader();
    }
 
    public void validate(HttpServletRequest request) {

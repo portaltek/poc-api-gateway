@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import static java.util.Set.of;
 
 
-public class LocalProfileServiceAdapter implements UserDetailsService {
+class LocalProfileServiceAdapter implements UserDetailsService {
 
    private static final String NOT_FOUND = "No user found with username '%s'.";
 

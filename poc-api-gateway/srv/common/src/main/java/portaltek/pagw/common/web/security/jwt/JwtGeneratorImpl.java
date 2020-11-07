@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import static io.jsonwebtoken.SignatureAlgorithm.HS512;
+import static java.lang.System.currentTimeMillis;
 import static org.springframework.security.core.authority.AuthorityUtils.authorityListToSet;
 import static portaltek.pagw.common.web.security.jwt.JwtUtil.*;
 
@@ -19,16 +20,13 @@ public class JwtGeneratorImpl implements JwtGenerator {
 
    private static final long serialVersionUID = -3301605591108950416L;
 
-   private String secret;
-   private Long expiration;
+   private JwtProps props;
    private UserDetailsService userDetailsService;
    final private SignatureAlgorithm signatureAlgorithm = HS512;
 
-   public JwtGeneratorImpl(String secret,
-                           Long expiration,
+   public JwtGeneratorImpl(JwtProps props,
                            UserDetailsService userDetailsService) {
-      this.secret = secret;
-      this.expiration = expiration;
+      this.props = props;
       this.userDetailsService = userDetailsService;
    }
 
@@ -71,7 +69,7 @@ public class JwtGeneratorImpl implements JwtGenerator {
       return Jwts.builder()
          .setClaims(claims)
          .setExpiration(generateExpirationDate("token"))
-         .signWith(signatureAlgorithm, secret)
+         .signWith(signatureAlgorithm, props.getSecret())
          .compact();
    }
 
@@ -79,15 +77,17 @@ public class JwtGeneratorImpl implements JwtGenerator {
       return Jwts.builder()
          .setClaims(claims)
          .setExpiration(generateExpirationDate("refresh"))
-         .signWith(signatureAlgorithm, secret)
+         .signWith(signatureAlgorithm, props.getSecret())
          .compact();
    }
 
    private Date generateExpirationDate(String type) {
       if (type.equals("token")) {
-         return new Date(System.currentTimeMillis() + expiration * 1000);
+         return new Date(currentTimeMillis()
+            + props.getExpiration() * 1000);
       } else {
-         return new Date(System.currentTimeMillis() + expiration * 5 * 1000);
+         return new Date(currentTimeMillis()
+            + props.getExpiration() * 5 * 1000);
       }
    }
 
