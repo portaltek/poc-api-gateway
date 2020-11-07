@@ -14,10 +14,8 @@ import static java.util.Set.of;
 
 class ProfileServiceAdapter implements UserDetailsService {
 
-   private static final String NOT_FOUND = "No user found with username '%s'.";
-
-   private Map<String, UserDetails> userMap = new ConcurrentHashMap<>();
-   private JwtUserFactory factory;
+   private final Map<String, UserDetails> userMap = new ConcurrentHashMap<>();
+   private final JwtUserFactory factory;
 
    public ProfileServiceAdapter(JwtUserFactory factory) {
       this.factory = factory;
