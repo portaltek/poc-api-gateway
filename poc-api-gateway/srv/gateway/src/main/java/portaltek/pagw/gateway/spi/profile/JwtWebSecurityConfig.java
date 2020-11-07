@@ -1,4 +1,4 @@
-package portaltek.pagw.gateway.api.rest.config;
+package portaltek.pagw.gateway.spi.profile;
 
 
 import org.springframework.beans.factory.annotation.Value;
@@ -15,8 +15,8 @@ import portaltek.pagw.gateway.spi.profile.ProfileServiceAdapter;
 import static portaltek.pagw.common.env.AppProfile.*;
 
 
-@Configuration
-class JwtWebSecurityConfig extends GenericJwtWebSecurityConfig {
+
+public class JwtWebSecurityConfig extends GenericJwtWebSecurityConfig {
 
    @Value("${jwt.header}")
    private String jwtHeader;
