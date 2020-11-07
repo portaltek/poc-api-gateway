@@ -28,15 +28,7 @@ class JwtWebSecurityConfig {
    @Value("${jwt.expiration}")
    private Long expiration;
 
-   @Bean
-   public PasswordEncoder passwordEncoder() {
-      return new BCryptPasswordEncoder();
-   }
 
-   @Bean
-   public JwtUserFactory jwtUserFactory(PasswordEncoder encoder) {
-      return new JwtUserFactory(encoder);
-   }
 
    @Profile({DEV, QA, STG, PROD})
    @Bean
@@ -49,10 +41,7 @@ class JwtWebSecurityConfig {
    public UserDetailsService localUserDetailsService(JwtUserFactory jwtUserFactory) {
       return new LocalProfileServiceAdapter(jwtUserFactory);
    }
-   @Bean
-   public WebSecurityEntryPoint unauthorizedHandler() {
-      return new WebSecurityEntryPoint();
-   }
+
 
    @Bean
    public JwtUtil jwtUtil() {
