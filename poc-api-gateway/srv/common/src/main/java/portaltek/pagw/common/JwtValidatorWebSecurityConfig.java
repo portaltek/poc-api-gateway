@@ -1,4 +1,4 @@
-package portaltek.pagw.gateway.api.rest.config;
+package portaltek.pagw.common;
 
 
 import org.springframework.context.annotation.Bean;
@@ -10,7 +10,7 @@ import portaltek.pagw.common.web.security.jwt.JwtUserFactory;
 
 
 @Configuration
-class JwtValidatorWebSecurityConfig {
+public class JwtValidatorWebSecurityConfig {
 
    @Bean
    public WebSecurityEntryPoint unauthorizedHandler() {

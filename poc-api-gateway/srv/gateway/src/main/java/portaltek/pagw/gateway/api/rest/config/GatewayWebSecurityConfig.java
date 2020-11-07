@@ -12,11 +12,10 @@ import portaltek.pagw.common.web.security.GenericWebSecurityConfig;
 import portaltek.pagw.common.web.security.WebSecurityEntryPoint;
 import portaltek.pagw.common.web.security.jwt.JwtFilter;
 
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@Import({JwtValidatorWebSecurityConfig.class, JwtWebSecurityConfig.class,})
+@Import({JwtWebSecurityConfig.class,})
 class GatewayWebSecurityConfig extends GenericWebSecurityConfig {
 
    @Autowired
