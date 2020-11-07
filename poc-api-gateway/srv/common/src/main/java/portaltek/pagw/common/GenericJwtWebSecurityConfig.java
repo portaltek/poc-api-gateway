@@ -13,6 +13,8 @@ public abstract class GenericJwtWebSecurityConfig {
 
    abstract public JwtProps jwtProps();
 
+   abstract public UserDetailsService userDetailsService(JwtUserFactory jwtUserFactory);
+
    @Bean
    public WebSecurityEntryPoint unauthorizedHandler() {
       return new WebSecurityEntryPoint();

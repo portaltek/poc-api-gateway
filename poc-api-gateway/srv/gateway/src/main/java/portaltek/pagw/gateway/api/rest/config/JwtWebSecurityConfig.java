@@ -4,8 +4,15 @@ package portaltek.pagw.gateway.api.rest.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import portaltek.pagw.common.GenericJwtWebSecurityConfig;
 import portaltek.pagw.common.web.security.jwt.JwtProps;
+import portaltek.pagw.common.web.security.jwt.JwtUserFactory;
+import portaltek.pagw.gateway.spi.profile.LocalProfileServiceAdapter;
+import portaltek.pagw.gateway.spi.profile.ProfileServiceAdapter;
+
+import static portaltek.pagw.common.env.AppProfile.*;
 
 
 @Configuration
@@ -23,6 +30,19 @@ class JwtWebSecurityConfig extends GenericJwtWebSecurityConfig {
    @Bean
    public JwtProps jwtProps() {
       return new JwtProps(jwtHeader, refreshJwtHeader, secret, expiration);
+   }
+
+
+   @Profile({DEV, QA, STG, PROD})
+   @Bean
+   public UserDetailsService userDetailsService(JwtUserFactory jwtUserFactory) {
+      return new ProfileServiceAdapter(jwtUserFactory);
+   }
+
+   @Profile(LOCAL)
+   @Bean
+   public UserDetailsService localUserDetailsService(JwtUserFactory jwtUserFactory) {
+      return new LocalProfileServiceAdapter(jwtUserFactory);
    }
 
 

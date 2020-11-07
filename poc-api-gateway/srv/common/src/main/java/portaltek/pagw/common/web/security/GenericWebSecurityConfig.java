@@ -17,6 +17,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 
 
 public class GenericWebSecurityConfig extends WebSecurityConfigurerAdapter {
+   
    protected static String[] ANONYMOUS_RESOURCES = {"/", "/*.html",
       "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js", "/**/*.jsp"};
 
