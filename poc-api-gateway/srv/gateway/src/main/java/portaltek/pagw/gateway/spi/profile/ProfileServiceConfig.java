@@ -13,14 +13,14 @@ class ProfileServiceConfig {
 
    @Profile({DEV, QA, STG, PROD})
    @Bean
-   public UserDetailsService userDetailsService(JwtUserFactory jwtUserFactory) {
+   UserDetailsService userDetailsService(JwtUserFactory jwtUserFactory) {
       return new ProfileServiceAdapter(jwtUserFactory);
    }
 
    @Profile(LOCAL)
    @Bean
-   public UserDetailsService localUserDetailsService(JwtUserFactory jwtUserFactory) {
+   UserDetailsService localUserDetailsService(JwtUserFactory jwtUserFactory) {
       return new LocalProfileServiceAdapter(jwtUserFactory);
    }
-   
+
 }
