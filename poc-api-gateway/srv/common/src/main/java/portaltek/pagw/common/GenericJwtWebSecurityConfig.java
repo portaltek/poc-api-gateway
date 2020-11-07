@@ -29,12 +29,8 @@ public abstract class GenericJwtWebSecurityConfig {
    }
 
    @Bean
-   public JwtFilter jwtFilter(JwtValidator jwtValidator) {
-      return new JwtFilter(jwtValidator);
-   }
-
-   @Bean
-   public JwtGenerator jwtGenerator(JwtProps props, UserDetailsService userService) {
+   public JwtGenerator jwtGenerator(JwtProps props,
+                                    UserDetailsService userService) {
       return new JwtGeneratorImpl(props, userService);
    }
 
@@ -46,6 +42,11 @@ public abstract class GenericJwtWebSecurityConfig {
    @Bean
    public JwtValidator jwtValidator(JwtUtil jwtUtil) {
       return new JwtValidator(jwtUtil);
+   }
+
+   @Bean
+   public JwtFilter jwtFilter(JwtValidator jwtValidator) {
+      return new JwtFilter(jwtValidator);
    }
 
 }
