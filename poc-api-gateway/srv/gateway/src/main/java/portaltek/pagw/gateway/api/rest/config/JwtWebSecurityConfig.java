@@ -60,12 +60,12 @@ class JwtWebSecurityConfig {
    }
 
    @Bean
-   public JwtValidator tokenValidator(JwtUtil jwtUtil) {
+   public JwtValidator jwtValidator(JwtUtil jwtUtil) {
       return new JwtValidator(jwtUtil, tokenHeader, refreshTokenHeader);
    }
 
    @Bean
-   public JwtFilter tokenFilter(JwtValidator jwtValidator) {
+   public JwtFilter jwtFilter(JwtValidator jwtValidator) {
       return new JwtFilter(jwtValidator);
    }
 
