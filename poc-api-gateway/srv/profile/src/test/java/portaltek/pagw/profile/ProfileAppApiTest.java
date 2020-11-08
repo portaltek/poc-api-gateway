@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContext;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
-class ProfileAppTest extends ProfileAppIntegrationTest {
+class ProfileAppApiTest extends AbstractProfileAppApiTest {
 
    @Autowired
    ApplicationContext ctx;

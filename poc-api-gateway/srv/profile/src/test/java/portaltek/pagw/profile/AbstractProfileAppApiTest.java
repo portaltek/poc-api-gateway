@@ -13,9 +13,9 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ProfileApp.class, webEnvironment = RANDOM_PORT)
-@Import(ProfileAppTestConfig.class)
+@Import(ProfileAppApiTestConfig.class)
 @ActiveProfiles(AppProfile.LOCAL)
-public abstract class ProfileAppIntegrationTest {
+public abstract class AbstractProfileAppApiTest {
    @Autowired
    protected Api api;
 }
