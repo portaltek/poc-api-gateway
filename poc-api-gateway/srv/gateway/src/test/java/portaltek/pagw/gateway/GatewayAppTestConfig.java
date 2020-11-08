@@ -10,7 +10,7 @@ import portaltek.pagw.common.web.test.Rest;
 
 @Lazy
 @TestConfiguration
-class GatewayAppTestConfig {
+public class GatewayAppTestConfig {
    private final String host = "http://localhost:";
    private final String createTokenPath = "/api/open/token/create";
    @LocalServerPort

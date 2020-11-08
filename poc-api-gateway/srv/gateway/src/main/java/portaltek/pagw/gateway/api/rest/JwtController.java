@@ -31,17 +31,17 @@ class JwtController {
    }
 
    @GetMapping(value = "/api/open/token/hi")
-   public ResponseEntity<ServerResponse> getHi() {
+   ResponseEntity<ServerResponse> getHi() {
       return ok(of("hi!"));
    }
 
    @PostMapping(value = "/api/auth/token/hi")
-   public ResponseEntity<ServerResponse> postHi() {
+   ResponseEntity<ServerResponse> postHi() {
       return ok(of("hi!"));
    }
 
    @PostMapping(value = "/api/open/token/create")
-   public ResponseEntity<?> createJwt(@RequestBody JwtRequest req)
+   ResponseEntity<?> createJwt(@RequestBody JwtRequest req)
       throws AuthenticationException {
 
       try {

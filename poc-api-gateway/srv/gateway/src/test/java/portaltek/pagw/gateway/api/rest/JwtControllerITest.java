@@ -1,4 +1,4 @@
-package portaltek.pagw.gateway;
+package portaltek.pagw.gateway.api.rest;
 
 
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +13,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import portaltek.pagw.common.env.AppProfile;
 import portaltek.pagw.common.web.test.Api;
+import portaltek.pagw.gateway.GatewayApp;
+import portaltek.pagw.gateway.GatewayAppTestConfig;
 
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
@@ -75,7 +77,7 @@ class JwtControllerITest {
 
    @Test
    void givenInValidToken_postHi_shouldReturn401() {
-      var header = api.createHeader(ADMIN_INVALID);
+      var header = api.createEmptyJsonHeader();
       header.setBearerAuth("123456");
       var req = new HttpEntity<>("", header);
 
