@@ -1,4 +1,4 @@
-package portaltek.pagw.common.web.security;
+package portaltek.pagw.common.web;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

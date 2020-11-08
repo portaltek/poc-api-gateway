@@ -4,7 +4,7 @@ package portaltek.pagw.gateway.api.rest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
-import portaltek.pagw.common.web.security.ServerResponse;
+import portaltek.pagw.common.web.ServerResponse;
 import portaltek.pagw.gateway.GatewayAppIntegrationTest;
 
 import static org.assertj.core.api.BDDAssertions.then;
@@ -14,10 +14,7 @@ import static portaltek.pagw.gateway.TestCredentials.ADMIN;
 import static portaltek.pagw.gateway.TestCredentials.USER;
 
 
-class GreetingControllerITest  extends GatewayAppIntegrationTest {
-
-   final static String EXPECTED_MSG = "{\"message\":\"hi!\"}";
-
+class GreetingControllerITest extends GatewayAppIntegrationTest {
 
    final String GET_ADMIN = "/api/auth/admin";
    final String GET_USER = "/api/auth/user";

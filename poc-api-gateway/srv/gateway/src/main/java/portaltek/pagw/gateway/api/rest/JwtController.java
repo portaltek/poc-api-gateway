@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import portaltek.pagw.common.web.security.ServerResponse;
+import portaltek.pagw.common.web.ServerResponse;
 import portaltek.pagw.common.web.security.jwt.JwtGenerator;
 import portaltek.pagw.common.web.security.jwt.JwtRequest;
 
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 import static org.springframework.http.ResponseEntity.ok;
 import static org.springframework.security.core.context.SecurityContextHolder.getContext;
-import static portaltek.pagw.common.web.security.ServerResponse.of;
+import static portaltek.pagw.common.web.ServerResponse.of;
 
 @RestController
 class JwtController {
@@ -51,7 +52,9 @@ class JwtController {
          getContext().setAuthentication(auth);
 
       } catch (AuthenticationException e) {
-         return ServerResponse.of(e);
+         return ResponseEntity
+            .status(UNAUTHORIZED)
+            .body(new ServerResponse(e.getMessage()));
       }
 
       var response = jwtGenerator.create(req.getUsername());

@@ -34,12 +34,6 @@ public class Api {
          .orElse("");
    }
 
-   public HttpHeaders createEmptyJsonHeader() {
-      HttpHeaders headers = new HttpHeaders();
-      headers.setContentType(MediaType.APPLICATION_JSON);
-      return headers;
-   }
-
    public HttpHeaders createHeader(Credentials credentials) {
       HttpHeaders headers = createEmptyJsonHeader();
       headers.setBearerAuth(createToken(credentials));
@@ -50,6 +44,19 @@ public class Api {
       HttpHeaders headers = createHeader(credentials);
       return new HttpEntity<>(body, headers);
    }
+
+   public HttpEntity<?> createReq(Object body) {
+      HttpHeaders headers = createEmptyJsonHeader();
+      return new HttpEntity<>(body, headers);
+   }
+
+   public HttpHeaders createEmptyJsonHeader() {
+      HttpHeaders headers = new HttpHeaders();
+      headers.setContentType(MediaType.APPLICATION_JSON);
+      return headers;
+   }
+
+
 
    public TestRestTemplate template() {
       return rest.template();

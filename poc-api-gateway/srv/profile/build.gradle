@@ -1,4 +1,9 @@
 dependencies {
+//   implementation(":srv:common") {
+//      //exclude "org.springframework.boot:spring-boot-starter-security:$springBootVersion"
+////      exclude "org.springframework.boot:spring-boot-starter-security"
+//      exclude group: 'org.springframework.boot', module: 'spring-boot-starter-security'
+//   }
    implementation(
       project(":srv:common"),
       "org.springframework.boot:spring-boot-starter-web:$springBootVersion",
