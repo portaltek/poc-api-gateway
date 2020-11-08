@@ -1,6 +1,6 @@
 package portaltek.pagw.profile;
 
-import portaltek.pagw.common.web.security.Credentials;
+import portaltek.pagw.common.web.Credentials;
 
 public class TestCredentials {
    public static final Credentials ADMIN = new Credentials("admin", "admin");

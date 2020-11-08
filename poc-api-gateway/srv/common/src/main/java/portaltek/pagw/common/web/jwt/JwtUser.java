@@ -1,4 +1,4 @@
-package portaltek.pagw.common.web.security.jwt;
+package portaltek.pagw.common.web.jwt;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;

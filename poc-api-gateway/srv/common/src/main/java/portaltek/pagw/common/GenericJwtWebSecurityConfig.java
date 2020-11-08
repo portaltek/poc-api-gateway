@@ -5,8 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import portaltek.pagw.common.web.security.WebSecurityEntryPoint;
-import portaltek.pagw.common.web.security.jwt.*;
+import portaltek.pagw.common.web.WebSecurityEntryPoint;
+import portaltek.pagw.common.web.jwt.*;
 
 
 public abstract class GenericJwtWebSecurityConfig {

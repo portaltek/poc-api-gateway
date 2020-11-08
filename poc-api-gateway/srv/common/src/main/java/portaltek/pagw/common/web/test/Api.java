@@ -6,13 +6,13 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import portaltek.pagw.common.web.security.Credentials;
-import portaltek.pagw.common.web.security.jwt.JwtRequest;
-import portaltek.pagw.common.web.security.jwt.JwtResponse;
+import portaltek.pagw.common.web.Credentials;
+import portaltek.pagw.common.web.jwt.JwtRequest;
+import portaltek.pagw.common.web.jwt.JwtResponse;
 
 import static java.util.Optional.ofNullable;
 import static org.springframework.http.HttpMethod.GET;
-import static portaltek.pagw.common.web.security.jwt.JwtRequest.getEntity;
+import static portaltek.pagw.common.web.jwt.JwtRequest.getEntity;
 
 
 public class Api {

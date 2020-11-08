@@ -1,4 +1,4 @@
-package portaltek.pagw.common.web.security;
+package portaltek.pagw.common.web;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

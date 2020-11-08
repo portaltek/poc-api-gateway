@@ -1,8 +1,8 @@
-package portaltek.pagw.common.web.security.jwt;
+package portaltek.pagw.common.web.jwt;
 
 
 import org.springframework.http.HttpEntity;
-import portaltek.pagw.common.web.security.Credentials;
+import portaltek.pagw.common.web.Credentials;
 
 import java.io.Serializable;
 
