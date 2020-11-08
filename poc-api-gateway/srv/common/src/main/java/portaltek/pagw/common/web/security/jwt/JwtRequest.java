@@ -2,6 +2,7 @@ package portaltek.pagw.common.web.security.jwt;
 
 
 import org.springframework.http.HttpEntity;
+import portaltek.pagw.common.web.security.Credentials;
 
 import java.io.Serializable;
 
@@ -40,5 +41,9 @@ public class JwtRequest implements Serializable {
    public static HttpEntity<JwtRequest> getEntity(String username, String password) {
       var req = new JwtRequest(username, password);
       return new HttpEntity<>(req);
+   }
+
+   public static HttpEntity<JwtRequest> getEntity(Credentials credentials) {
+      return getEntity(credentials.username(), credentials.password());
    }
 }

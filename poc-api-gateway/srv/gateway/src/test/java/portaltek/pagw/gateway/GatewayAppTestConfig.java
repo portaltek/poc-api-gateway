@@ -6,14 +6,13 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 import portaltek.pagw.common.web.test.Api;
-import portaltek.pagw.common.web.test.Header;
 import portaltek.pagw.common.web.test.Rest;
 
 @Lazy
 @TestConfiguration
 class GatewayAppTestConfig {
    private final String host = "http://localhost:";
-   private final String createTokenEndpoint = "/api/open/token/create";
+   private final String createTokenPath = "/api/open/token/create";
    @LocalServerPort
    private int port;
 
@@ -24,12 +23,7 @@ class GatewayAppTestConfig {
 
    @Bean
    public Api api(Rest rest) {
-      return new Api(rest, createTokenEndpoint);
-   }
-
-   @Bean
-   public Header header(Api api) {
-      return new Header(api);
+      return new Api(rest, createTokenPath);
    }
 
 

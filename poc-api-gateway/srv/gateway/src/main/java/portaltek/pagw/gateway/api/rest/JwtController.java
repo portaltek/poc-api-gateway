@@ -31,7 +31,12 @@ class JwtController {
    }
 
    @GetMapping(value = "/api/open/token/hi")
-   public ResponseEntity<ServerResponse> ping() {
+   public ResponseEntity<ServerResponse> getHi() {
+      return ok(of("hi!"));
+   }
+
+   @PostMapping(value = "/api/auth/token/hi")
+   public ResponseEntity<ServerResponse> postHi() {
       return ok(of("hi!"));
    }
 

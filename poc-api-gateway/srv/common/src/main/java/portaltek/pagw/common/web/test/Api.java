@@ -6,6 +6,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import portaltek.pagw.common.web.security.Credentials;
 import portaltek.pagw.common.web.security.jwt.JwtRequest;
 import portaltek.pagw.common.web.security.jwt.JwtResponse;
 
@@ -18,44 +19,48 @@ import static portaltek.pagw.common.web.security.jwt.JwtUtil.BEARER;
 public class Api {
 
    final private Rest rest;
-   final private String tokenEndpoint;
+   final private String createTokenPath;
 
-   public Api(Rest rest, String tokenEndpoint) {
+   public Api(Rest rest, String createTokenPath) {
       this.rest = rest;
-      this.tokenEndpoint = tokenEndpoint;
+      this.createTokenPath = createTokenPath;
    }
 
-   public String createToken(String username, String password) {
+   public String createToken(Credentials credentials) {
 
-      HttpEntity<JwtRequest> req = getEntity(username, password);
-      var url = url(tokenEndpoint);
-      return ofNullable(post(url, req, JwtResponse.class))
+      HttpEntity<JwtRequest> req = getEntity(credentials);
+      return ofNullable(post(createTokenPath, req, JwtResponse.class))
          .map(HttpEntity::getBody)
          .map(JwtResponse::getToken)
          .orElse("");
    }
 
-   public HttpHeaders createHeaderWithNewToken(String username, String password) {
+   public HttpHeaders createHeader(Credentials credentials) {
       HttpHeaders headers = new HttpHeaders();
       headers.setContentType(MediaType.APPLICATION_JSON);
-      headers.add(AUTHORIZATION, BEARER + createToken(username, password));
+      headers.setBearerAuth(createToken(credentials));
       return headers;
+   }
+
+   public HttpEntity<?> createReq(Credentials credentials, Object body) {
+      HttpHeaders headers = createHeader(credentials);
+      return new HttpEntity<>(body, headers);
    }
 
    public TestRestTemplate template() {
       return rest.template();
    }
 
-   public <T> ResponseEntity<T> get(String url, Class<T> reqType) {
-      return template().getForEntity(url, reqType);
+   public <T> ResponseEntity<T> get(String path, Class<T> reqType) {
+      return template().getForEntity(url(path), reqType);
    }
 
-   public <T> ResponseEntity<T> post(String url, Object req, Class<T> reqType) {
-      return template().postForEntity(url, req, reqType);
+   public <T> ResponseEntity<T> post(String path, Object req, Class<T> reqType) {
+      return template().postForEntity(url(path), req, reqType);
    }
 
-   public String url(String endpoint) {
-      return rest.url(endpoint);
+   public String url(String path) {
+      return rest.url(path);
    }
 
 }
