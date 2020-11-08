@@ -3,40 +3,22 @@ package portaltek.pagw.gateway.api.rest;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
-import portaltek.pagw.common.env.AppProfile;
-import portaltek.pagw.common.web.test.Api;
-import portaltek.pagw.gateway.GatewayApp;
-import portaltek.pagw.gateway.GatewayAppTestConfig;
+import portaltek.pagw.gateway.GatewayAppIntegrationTest;
 
 import static org.assertj.core.api.BDDAssertions.then;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 import static portaltek.pagw.gateway.TestCredentials.ADMIN;
 import static portaltek.pagw.gateway.TestCredentials.ADMIN_INVALID;
 
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = GatewayApp.class, webEnvironment = RANDOM_PORT)
-@Import(GatewayAppTestConfig.class)
-@ActiveProfiles(AppProfile.LOCAL)
-class JwtControllerITest {
+class JwtControllerITest extends GatewayAppIntegrationTest {
 
    final static String EXPECTED_MSG = "{\"message\":\"hi!\"}";
-
-   @Autowired
-   Api api;
    final String POST_HI = "/api/auth/token/hi";
    final String GET_HI = "/api/open/token/hi";
-
 
    @BeforeEach
    void init() {
