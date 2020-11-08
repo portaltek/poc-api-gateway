@@ -18,7 +18,6 @@ import portaltek.pagw.gateway.GatewayAppTestConfig;
 
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
-import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 import static portaltek.pagw.gateway.TestCredentials.ADMIN;

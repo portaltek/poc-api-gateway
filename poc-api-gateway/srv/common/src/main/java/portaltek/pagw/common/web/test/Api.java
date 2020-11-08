@@ -2,16 +2,17 @@ package portaltek.pagw.common.web.test;
 
 
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import portaltek.pagw.common.web.security.Credentials;
 import portaltek.pagw.common.web.security.jwt.JwtRequest;
 import portaltek.pagw.common.web.security.jwt.JwtResponse;
 
 import static java.util.Optional.ofNullable;
-import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpMethod.GET;
 import static portaltek.pagw.common.web.security.jwt.JwtRequest.getEntity;
-import static portaltek.pagw.common.web.security.jwt.JwtUtil.BEARER;
 
 
 public class Api {
