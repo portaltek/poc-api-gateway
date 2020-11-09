@@ -8,9 +8,9 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import portaltek.pagw.common.web.GenericWebSecurityConfig;
-import portaltek.pagw.common.web.WebSecurityEntryPoint;
-import portaltek.pagw.common.web.jwt.JwtFilter;
+import portaltek.pagw.common.web.security.GenericWebSecurityConfig;
+import portaltek.pagw.common.web.security.WebSecurityEntryPoint;
+import portaltek.pagw.common.web.security.jwt.JwtFilter;
 import portaltek.pagw.gateway.spi.profile.JwtWebSecurityConfig;
 
 @Configuration

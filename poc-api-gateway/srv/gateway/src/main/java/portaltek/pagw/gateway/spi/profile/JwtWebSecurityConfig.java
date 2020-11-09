@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import portaltek.pagw.common.GenericJwtWebSecurityConfig;
-import portaltek.pagw.common.web.jwt.JwtProps;
-import portaltek.pagw.common.web.jwt.JwtUserFactory;
+import portaltek.pagw.common.web.security.GenericJwtWebSecurityConfig;
+import portaltek.pagw.common.web.security.jwt.JwtProps;
+import portaltek.pagw.common.web.security.jwt.JwtUserFactory;
 
 import static portaltek.pagw.common.env.AppProfile.*;
 

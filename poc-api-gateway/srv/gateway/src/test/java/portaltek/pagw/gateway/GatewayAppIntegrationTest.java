@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import portaltek.pagw.common.env.AppProfile;
+import portaltek.pagw.common.web.security.jwt.JwtApi;
 import portaltek.pagw.common.web.test.Api;
 
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
@@ -18,4 +19,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 public abstract class GatewayAppIntegrationTest {
    @Autowired
    protected Api api;
+   @Autowired
+   protected JwtApi jwt;
+
 }

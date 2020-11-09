@@ -1,4 +1,4 @@
-package portaltek.pagw.common.web.jwt;
+package portaltek.pagw.common.web.security.jwt;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

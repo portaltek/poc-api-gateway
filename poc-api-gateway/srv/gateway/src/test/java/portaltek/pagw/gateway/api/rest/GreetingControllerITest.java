@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import portaltek.pagw.common.web.ServerResponse;
 import portaltek.pagw.gateway.GatewayAppIntegrationTest;
 
+import static java.util.Objects.requireNonNull;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.HttpStatus.OK;
@@ -27,17 +28,17 @@ class GreetingControllerITest extends GatewayAppIntegrationTest {
 
    @Test
    void givenAdminCredentials_getAdmin_shouldReturnMsg() {
-      var req = api.createReq(ADMIN, "");
+      var req = jwt.createReq(ADMIN, "");
 
       ResponseEntity<ServerResponse> reply = api.get(GET_ADMIN, req, ServerResponse.class);
 
       then(reply.getStatusCode()).isEqualTo(OK);
-      then(reply.getBody().getMessage()).isEqualTo(MSG_ADMIN);
+      then(requireNonNull(reply.getBody()).getMessage()).isEqualTo(MSG_ADMIN);
    }
 
    @Test
    void givenUserCredentials_getAdmin_shouldReturn403() {
-      var req = api.createReq(USER, "");
+      var req = jwt.createReq(USER, "");
 
       ResponseEntity<ServerResponse> reply = api.get(GET_ADMIN, req, ServerResponse.class);
 
@@ -46,22 +47,22 @@ class GreetingControllerITest extends GatewayAppIntegrationTest {
 
    @Test
    void givenAdminCredentials_getUser_shouldReturnMsg() {
-      var req = api.createReq(ADMIN, "");
+      var req = jwt.createReq(ADMIN, "");
 
       ResponseEntity<ServerResponse> reply = api.get(GET_USER, req, ServerResponse.class);
 
       then(reply.getStatusCode()).isEqualTo(OK);
-      then(reply.getBody().getMessage()).isEqualTo(MSG_USER);
+      then(requireNonNull(reply.getBody()).getMessage()).isEqualTo(MSG_USER);
    }
 
    @Test
    void givenUserCredentials_getUser_shouldReturnMsg() {
-      var req = api.createReq(USER, "");
+      var req = jwt.createReq(USER, "");
 
       ResponseEntity<ServerResponse> reply = api.get(GET_USER, req, ServerResponse.class);
 
       then(reply.getStatusCode()).isEqualTo(OK);
-      then(reply.getBody().getMessage()).isEqualTo(MSG_USER);
+      then(requireNonNull(reply.getBody()).getMessage()).isEqualTo(MSG_USER);
    }
 
 }

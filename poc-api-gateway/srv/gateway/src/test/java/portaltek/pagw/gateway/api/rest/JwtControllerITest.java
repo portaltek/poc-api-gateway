@@ -26,13 +26,13 @@ class JwtControllerITest extends GatewayAppIntegrationTest {
 
    @Test
    void postValidLogin_shouldReturnToken() {
-      String token = api.createToken(ADMIN);
+      String token = jwt.createToken(ADMIN);
       then(token).isNotNull();
    }
 
    @Test
    void postInvalidLogin_shouldReturnEmpty() {
-      String token = api.createToken(ADMIN_INVALID);
+      String token = jwt.createToken(ADMIN_INVALID);
       then(token).isEmpty();
    }
 
@@ -47,7 +47,7 @@ class JwtControllerITest extends GatewayAppIntegrationTest {
 
    @Test
    void givenValidAdmin_postHi_shouldReturnHi() {
-      var req = api.createReq(ADMIN, "");
+      var req = jwt.createReq(ADMIN, "");
 
       ResponseEntity<String> response = api.post(POST_HI, req, String.class);
 

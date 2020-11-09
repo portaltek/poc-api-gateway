@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import portaltek.pagw.common.web.ServerResponse;
-import portaltek.pagw.common.web.jwt.JwtGenerator;
-import portaltek.pagw.common.web.jwt.JwtRequest;
+import portaltek.pagw.common.web.security.jwt.JwtGenerator;
+import portaltek.pagw.common.web.security.jwt.JwtRequest;
 
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 import static org.springframework.http.ResponseEntity.ok;

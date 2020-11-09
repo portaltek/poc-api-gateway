@@ -5,6 +5,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
+import portaltek.pagw.common.web.security.jwt.JwtApi;
 import portaltek.pagw.common.web.test.Api;
 import portaltek.pagw.common.web.test.Rest;
 
@@ -23,10 +24,13 @@ public class GatewayAppTestConfig {
 
    @Bean
    public Api api(Rest rest) {
-      return new Api(rest, createTokenPath);
+      return new Api(rest);
    }
 
-
+   @Bean
+   public JwtApi jwtApi(Api api) {
+      return new JwtApi(api, createTokenPath);
+   }
 }
 
 

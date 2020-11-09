@@ -3,7 +3,7 @@ package portaltek.pagw.gateway.spi.profile;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import portaltek.pagw.common.web.jwt.JwtUserFactory;
+import portaltek.pagw.common.web.security.jwt.JwtUserFactory;
 
 import java.util.Map;
 import java.util.Optional;

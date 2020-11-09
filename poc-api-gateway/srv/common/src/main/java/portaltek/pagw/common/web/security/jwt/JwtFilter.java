@@ -1,4 +1,4 @@
-package portaltek.pagw.common.web.jwt;
+package portaltek.pagw.common.web.security.jwt;
 
 
 import org.apache.commons.logging.Log;

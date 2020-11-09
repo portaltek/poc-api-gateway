@@ -6,43 +6,16 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import portaltek.pagw.common.web.Credentials;
-import portaltek.pagw.common.web.jwt.JwtRequest;
-import portaltek.pagw.common.web.jwt.JwtResponse;
 
-import static java.util.Optional.ofNullable;
 import static org.springframework.http.HttpMethod.GET;
-import static portaltek.pagw.common.web.jwt.JwtRequest.getEntity;
 
 
 public class Api {
 
    final private Rest rest;
-   final private String createTokenPath;
 
-   public Api(Rest rest, String createTokenPath) {
+   public Api(Rest rest) {
       this.rest = rest;
-      this.createTokenPath = createTokenPath;
-   }
-
-   public String createToken(Credentials credentials) {
-
-      HttpEntity<JwtRequest> req = getEntity(credentials);
-      return ofNullable(post(createTokenPath, req, JwtResponse.class))
-         .map(HttpEntity::getBody)
-         .map(JwtResponse::getToken)
-         .orElse("");
-   }
-
-   public HttpHeaders createHeader(Credentials credentials) {
-      HttpHeaders headers = createEmptyJsonHeader();
-      headers.setBearerAuth(createToken(credentials));
-      return headers;
-   }
-
-   public HttpEntity<?> createReq(Credentials credentials, Object body) {
-      HttpHeaders headers = createHeader(credentials);
-      return new HttpEntity<>(body, headers);
    }
 
    public HttpEntity<?> createReq(Object body) {
@@ -55,8 +28,6 @@ public class Api {
       headers.setContentType(MediaType.APPLICATION_JSON);
       return headers;
    }
-
-
 
    public TestRestTemplate template() {
       return rest.template();

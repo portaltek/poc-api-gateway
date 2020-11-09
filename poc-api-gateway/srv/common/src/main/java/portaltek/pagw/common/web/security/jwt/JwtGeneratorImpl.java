@@ -1,4 +1,4 @@
-package portaltek.pagw.common.web.jwt;
+package portaltek.pagw.common.web.security.jwt;
 
 
 import io.jsonwebtoken.Jwts;
@@ -13,7 +13,7 @@ import java.util.UUID;
 import static io.jsonwebtoken.SignatureAlgorithm.HS512;
 import static java.lang.System.currentTimeMillis;
 import static org.springframework.security.core.authority.AuthorityUtils.authorityListToSet;
-import static portaltek.pagw.common.web.jwt.JwtUtil.*;
+import static portaltek.pagw.common.web.security.jwt.JwtUtil.*;
 
 
 public class JwtGeneratorImpl implements JwtGenerator {

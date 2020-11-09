@@ -12,7 +12,6 @@ import portaltek.pagw.common.web.test.Rest;
 @TestConfiguration
 public class ProfileAppApiTestConfig {
    private final String host = "http://localhost:";
-   private final String createTokenPath = "/api/open/token/create";
    @LocalServerPort
    private int port;
 
@@ -23,7 +22,7 @@ public class ProfileAppApiTestConfig {
 
    @Bean
    public Api api(Rest rest) {
-      return new Api(rest, createTokenPath);
+      return new Api(rest);
    }
 
 
