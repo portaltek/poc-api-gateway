@@ -1,8 +1,5 @@
 dependencies {
-   implementation(
-      "org.springframework.boot:spring-boot-starter-web:$springBootVersion",
-      "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion",
-   )
-
-
+//   implementation(
+//
+//   )
 }

@@ -1,6 +1,7 @@
 dependencies {
    implementation(
       project(":srv:common"),
+      project(":srv:common-web"),
       project(":srv:common-security"),
       "org.springframework.boot:spring-boot-starter-web:$springBootVersion",
       "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion",
