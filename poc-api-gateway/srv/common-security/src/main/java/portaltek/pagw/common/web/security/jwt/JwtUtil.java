@@ -20,7 +20,7 @@ public class JwtUtil implements Serializable {
    public static final String CLAIM_KEY_ROLES = "roles";
    public static final String BEARER = "Bearer ";
 
-   private JwtProps props;
+   final private JwtProps props;
 
    public JwtUtil(JwtProps props) {
       this.props = props;
@@ -31,7 +31,7 @@ public class JwtUtil implements Serializable {
    }
 
    private Claims getClaimsFromToken(String token) throws ExpiredJwtException, UnsupportedJwtException,
-      MalformedJwtException, SignatureException, IllegalArgumentException {
+      MalformedJwtException, IllegalArgumentException {
 
       return Jwts.parser()
          .setSigningKey(props.getSecret())
