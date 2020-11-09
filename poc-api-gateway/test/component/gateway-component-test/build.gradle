@@ -1,5 +1,6 @@
 dependencies {
-   implementation(
+   testImplementation(
+      project(":srv:gateway"),
       project(":srv:common"),
       project(":srv:common-web"),
       project(":srv:common-security"),
