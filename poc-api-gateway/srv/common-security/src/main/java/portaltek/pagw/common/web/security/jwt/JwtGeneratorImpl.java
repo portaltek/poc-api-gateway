@@ -69,7 +69,7 @@ public class JwtGeneratorImpl implements JwtGenerator {
       return Jwts.builder()
          .setClaims(claims)
          .setExpiration(generateExpirationDate("token"))
-         .signWith(signatureAlgorithm, props.getSecret())
+         .signWith(signatureAlgorithm, props.secret())
          .compact();
    }
 
@@ -77,17 +77,17 @@ public class JwtGeneratorImpl implements JwtGenerator {
       return Jwts.builder()
          .setClaims(claims)
          .setExpiration(generateExpirationDate("refresh"))
-         .signWith(signatureAlgorithm, props.getSecret())
+         .signWith(signatureAlgorithm, props.secret())
          .compact();
    }
 
    private Date generateExpirationDate(String type) {
       if (type.equals("token")) {
          return new Date(currentTimeMillis()
-            + props.getExpiration() * 1000);
+            + props.expiration() * 1000);
       } else {
          return new Date(currentTimeMillis()
-            + props.getExpiration() * 5 * 1000);
+            + props.expiration() * 5 * 1000);
       }
    }
 

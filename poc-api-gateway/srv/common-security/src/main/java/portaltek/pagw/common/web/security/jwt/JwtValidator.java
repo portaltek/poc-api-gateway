@@ -23,7 +23,7 @@ public class JwtValidator {
 
    public JwtValidator(JwtUtil jwtUtil) {
       this.jwtUtil = jwtUtil;
-      this.tokenHeader = jwtUtil.getProps().getTokenHeader();
+      this.tokenHeader = jwtUtil.getProps().tokenHeader();
    }
 
    public void validate(HttpServletRequest request) {

@@ -34,7 +34,7 @@ public class JwtUtil implements Serializable {
       MalformedJwtException, IllegalArgumentException {
 
       return Jwts.parser()
-         .setSigningKey(props.getSecret())
+         .setSigningKey(props.secret())
          .parseClaimsJws(removePrefix(token))
          .getBody();
 
