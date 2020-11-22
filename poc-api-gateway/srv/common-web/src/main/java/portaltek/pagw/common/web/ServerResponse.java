@@ -1,26 +1,17 @@
 package portaltek.pagw.common.web;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
+@Data
+@Accessors(fluent = false)
+@NoArgsConstructor
+@AllArgsConstructor
 public class ServerResponse {
 
    private String message;
-
-   public ServerResponse(String message) {
-      super();
-      this.message = message;
-   }
-
-   public ServerResponse() {
-      super();
-   }
-
-   public String getMessage() {
-      return message;
-   }
-
-   public void setMessage(String message) {
-      this.message = message;
-   }
 
    public static ServerResponse of(String message) {
       return new ServerResponse(message);
