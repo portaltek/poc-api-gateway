@@ -32,7 +32,7 @@ public class JwtWebSecurityConfig extends GenericJwtWebSecurityConfig {
    @Profile({DEV, QA, STG, PROD})
    @Bean
    public UserDetailsService userDetailsService(JwtUserFactory jwtUserFactory) {
-      return new ProfileServiceAdapter(jwtUserFactory);
+      return new LocalProfileServiceAdapter(jwtUserFactory);
    }
 
    @Profile(LOCAL)
