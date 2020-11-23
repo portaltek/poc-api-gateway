@@ -1,0 +1,10 @@
+def getActiveProfile(){
+   def props = new Properties()
+   def fileDir = "src/main/resources/application.properties"
+   file(fileDir).withInputStream { props.load(it) }
+   return props.getProperty("spring.profiles.active")
+}
+
+ext {
+   getActiveProfile = this.&getActiveProfile
+}

@@ -1,3 +1,5 @@
+apply from: "$rootDir/build-functions.gradle"
+
 dependencies {
    implementation(
       project(":srv:common"),
@@ -14,13 +16,7 @@ dependencies {
       'org.spockframework:spock-core:2.0-M3-groovy-3.0'
    )
 
-   runtime(
-      "com.h2database:h2:1.4.200"
-   )
-   testRuntime(
-      "com.h2database:h2:1.4.200"
-   )
-   if (isLOCAL) {
+   if (getActiveProfile() == "LOCAL") {
       runtime(
          "com.h2database:h2:1.4.200"
       )
@@ -29,3 +25,4 @@ dependencies {
       )
    }
 }
+

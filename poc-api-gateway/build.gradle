@@ -1,12 +1,11 @@
+
 ext {
    springBootVersion = "2.3.4.RELEASE"
    archunitVersion = "1.1.0"
-   isLOCAL  = System.properties['env'] == 'LOCAL'
-   isDEV    = System.properties['env'] == 'DEV'
-   isQA     = System.properties['env'] == 'QA'
-   isSTG    = System.properties['env'] == 'STG'
-   isPROD   = System.properties['env'] == 'PROD'
 }
+
+
+
 subprojects {
    apply plugin: 'java-library'
    apply plugin: 'java'
