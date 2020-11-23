@@ -38,6 +38,7 @@ public class JwtWebSecurityConfig extends GenericJwtWebSecurityConfig {
    @Profile(LOCAL)
    @Bean
    public UserDetailsService localUserDetailsService(JwtUserFactory jwtUserFactory) {
+      System.out.println("localUserDetailsService");
       return new LocalProfileServiceAdapter(jwtUserFactory);
    }
 

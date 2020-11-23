@@ -74,7 +74,7 @@ public class GenericWebSecurityConfig extends WebSecurityConfigurerAdapter {
          .antMatchers(GET, ANONYMOUS_RESOURCES).permitAll()
          .antMatchers(OPTIONS).permitAll()
          .antMatchers("/api/open/**").permitAll()
-         .antMatchers("/console/**").permitAll()
+         .antMatchers("/h2-console/**").permitAll()
          .antMatchers("/actuator/health").permitAll()
          .anyRequest().authenticated().and();
    }
